@@ -1,41 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Table } from "react-infinite-table";
 import "react-infinite-table/dist/style.css";
-import './App.css';
-
-function cellRenderer({
-  key,
-  columnIndex,
-  column,
-  rowData,
-  rowIndex,
-  className
-}) {
-  return (
-    <td key={key} className={className}>
-      R:{rowData.i} C:{column.i}
-    </td>
-  );
-}
-
-function headerRenderer({ key, columnIndex, column, className }) {
-  return (
-    <th key={key} className={className}>
-      C:{column.i}
-    </th>
-  );
-}
-
-const _columns = [];
-
-for (let index = 0; index < 30; index++) {
-  _columns.push({
-    i: index,
-    cellRenderer: cellRenderer,
-    headerRenderer: headerRenderer,
-    width: 90
-  });
-}
+import './App.scss';
+const columnData = require('./data/column.json');
 
 function createAllRows() {
   const rows = [];
@@ -60,8 +27,42 @@ function recreateRows(infiniteScrolling) {
 
 function App() {
   const [rows, setRows] = useState(createAllRows());
-  const [columns, setColumns] = useState(_columns);
+  const [columns, setColumns] = useState([]);
   const [isInfiniteLoading, setIsInfiniteLoading] = useState(false);
+
+  useEffect(() => {
+    const data = generateColumns();
+    setColumns(data);
+  }, []);
+
+  function generateColumns() {
+    const data = [];
+    columnData.forEach((col) => {
+      data.push({
+        name: col.name,
+        width: col.width,
+        headerRenderer: headerRenderer,
+        cellRenderer: cellRenderer
+      })
+    });
+    return data;
+  }
+
+  function headerRenderer({ columnIndex, column, className }) {
+    return (
+      <th key={columnIndex} className={className}>
+        {column.name}
+      </th>
+    );
+  }
+
+  function cellRenderer({ columnIndex, column, rowData, rowIndex, className }) {
+    return (
+      <td key={rowIndex} className={className}>
+        Row: {rowIndex}
+      </td>
+    );
+  }
 
   const onInfiniteScrolling = (infiniteScroll) => {
     const rows = recreateRows(infiniteScroll);
@@ -88,14 +89,13 @@ function App() {
   return (
     <div className="App">
       <div className='container'>
+        <h1>Transactions</h1>
         <Table
           className="app-table"
           height={800}
-          rowHeight={30}
+          rowHeight={40}
           rows={rows}
           columns={columns}
-          fixedColumnsLeftCount={1}
-          headerCount={1}
           noRowsRenderer={() => "No rows"}
           infiniteLoadBeginEdgeOffset={150}
           isInfiniteLoading={isInfiniteLoading}

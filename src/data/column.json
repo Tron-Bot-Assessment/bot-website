@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Hash",
+    "width": 180
+  },
+  {
+    "name": "Block",
+    "width": 100
+  },
+  {
+    "name": "Age",
+    "width": 140
+  },
+  {
+    "name": "Type",
+    "width": 100
+  },
+  {
+    "name": "From",
+    "width": 160
+  },
+  {
+    "name": "To",
+    "width": 160
+  },
+  {
+    "name": "Token",
+    "width": 140
+  },
+  {
+    "name": "Status",
+    "width": 120
+  }
+]

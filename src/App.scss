@@ -13,15 +13,26 @@
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
+  margin-top: 40px;
   min-width: 1140px;
 }
 
 .app-table {
-  background: white;
-  max-width: calc(100vw - 60px);
+  font-size: 14px;
 
-  border-left: 1px solid #cccc;
-  border-top: 1px solid #cccc;
+  th {
+    background-color: #f6f7fb;
+    padding: 9px 12px;
+    border-top: 1px solid #cccc;
+    border-bottom: 1px solid #cccc;
+    color: #73787b;
+  }
+
+  td {
+    background-color: #ffff;
+    border-bottom: 1px solid #eee;
+    padding: 14px 12px;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 1399px) {
