@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Table } from "react-infinite-table";
 import TimeAgo from "react-timeago";
 import LoadingSpin from "react-loading-spin";
+import io from 'socket.io-client';
 import "react-infinite-table/dist/style.css";
 import "./App.scss";
 import { useTransaction } from "./hooks/useTransaction";
@@ -11,6 +12,7 @@ const columnData = require("./data/column.json");
 
 const DECIMALS = 1000000;
 const WATCH_WALLET = "TSaJqQ1AZ2bEYyqBwBmJqCBSPv8KPRTAdv";
+const socket = io();
 
 function App() {
   const [rows, setRows] = useState([]);
@@ -23,6 +25,22 @@ function App() {
     const data = generateColumns();
     setColumns(data);
     generateTransactions(fingerprint);
+  }, []);
+
+  useEffect(() => {
+    socket.on('connect', () => {});
+
+    socket.on('disconnect', () => {});
+
+    socket.on('newTransaction', () => {
+      generateTransactions(null);
+    });
+
+    return () => {
+      socket.off('connect');
+      socket.off('disconnect');
+      socket.off('newTransaction');
+    };
   }, []);
 
   function generateColumns() {
