@@ -17,6 +17,22 @@
   min-width: 1140px;
 }
 
+.app-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.refresh-btn {
+  margin-left: 24px;
+}
+.refresh-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
 .app-table {
   font-size: 14px;
 
@@ -26,13 +42,27 @@
     border-top: 1px solid #cccc;
     border-bottom: 1px solid #cccc;
     color: #73787b;
+    text-align: left;
   }
 
   td {
     background-color: #ffff;
     border-bottom: 1px solid #eee;
     padding: 14px 12px;
+    color: #404245;
   }
+}
+
+a {
+  color: #c23631!important;
+  text-decoration: none;
+  transition: color .5s ease-in;
+}
+
+a:hover {
+  color: #e50915!important;
+  text-decoration: none;
+  transition: color .1s ease-in;
 }
 
 @media (min-width: 768px) and (max-width: 1399px) {

@@ -4,10 +4,6 @@
     "width": 180
   },
   {
-    "name": "Block",
-    "width": 100
-  },
-  {
     "name": "Age",
     "width": 140
   },
@@ -25,7 +21,7 @@
   },
   {
     "name": "Token",
-    "width": 140
+    "width": 240
   },
   {
     "name": "Status",
